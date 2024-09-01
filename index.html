@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+</head>
+<style>
+    #message-tab{
+        width:800px;
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<body>
+    <h1>CHAT THIS IS REAL</h1>
+    <textarea type="text" id="message-tab" oninput="Message(this.value)"></textarea>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io()
+        const text = document.getElementById("message-tab")
+
+        const Message = (data) =>{
+            console.log(data)
+            socket.emit("Message", data)
+            }
+        
+
+        socket.on("message-out", (data)=>{
+            text.value = data
+        })
+    </script>
+</body>
+</html>
